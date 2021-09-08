@@ -1,0 +1,11 @@
+task downloadTestImg(type: Download) {
+    src 'https://tensorflow.org/images/blogs/serving/cat.jpg'
+    dest project.ext.ASSET_DIR + '/cat.jpg'
+    overwrite false
+}
+
+tasks.whenTaskAdded { task ->
+    if ((task.name == 'assembleDebug') || (task.name == 'assembleRelease')) {
+        task.dependsOn 'downloadTestImg'
+    }
+}
